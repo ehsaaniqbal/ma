@@ -127,14 +127,17 @@ func (l *Lexer) readIdentifier() string {
 
 	for isLetter(l.ch) {
 		l.readChar()
-		//fmt.Println(l.input[pos: l.position])
-		if isWhitespace(l.ch) {
-			//fmt.Println("WHITESPACE", l.peekChar())
-			pc := l.peekChar()
-			if pc == 'd' || pc == 'b' || pc == 'y' {
-				l.readChar()
+		// fmt.Println(l.input[pos: l.position])
+		if token.LookupIdentifier(l.input[pos:l.position]) == "IDENT" {
+			if isWhitespace(l.ch) {
+				// fmt.Println("WHITESPACE", l.peekChar())
+				pc := l.peekChar()
+				if pc == 'd' || pc == 'b' || pc == 'y' {
+					l.readChar()
+				}
 			}
 		}
+
 	}
 
 	return l.input[pos:l.position]
