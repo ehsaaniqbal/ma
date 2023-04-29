@@ -8,7 +8,6 @@ import (
 	"github.com/ehsaaniqbal/ma/lexer"
 )
 
-
 func TestFunctionLiteralParsing(t *testing.T) {
 	input := `initiative(x, y) { x + y; }`
 
@@ -236,7 +235,6 @@ func TestIfElseExpression(t *testing.T) {
 		return
 	}
 }
-
 
 func TestIfExpression(t *testing.T) {
 	input := `super dream (x < y) { x }`

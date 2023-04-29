@@ -383,7 +383,6 @@ func TestBuiltinFunctions(t *testing.T) {
 	}
 }
 
-
 func testEval(input string) object.Object {
 	l := lexer.New(input)
 	p := parser.New(l)
@@ -429,4 +428,3 @@ func testNullObject(t *testing.T, obj object.Object) bool {
 	}
 	return true
 }
-
