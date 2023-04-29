@@ -2,6 +2,7 @@ package parser
 
 import (
 	"fmt"
+	"io"
 	"strconv"
 
 	"github.com/ehsaaniqbal/ma/ast"
@@ -443,4 +444,11 @@ func (p *Parser) curPrecedence() int {
 	}
 
 	return LOWEST
+}
+
+func PrintParserErrors(out io.Writer, errors []string) {
+	io.WriteString(out, "NOT MY PROBLEM MA\n")
+	for _, msg := range errors {
+		io.WriteString(out, "\t"+msg+"\n")
+	}
 }

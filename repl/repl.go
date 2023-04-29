@@ -30,7 +30,7 @@ func Start(in io.Reader, out io.Writer) {
 
 		program := p.ParseProgram()
 		if len(p.Errors()) != 0 {
-			printParserErrors(out, p.Errors())
+			parser.PrintParserErrors(out, p.Errors())
 			continue
 		}
 
@@ -39,12 +39,5 @@ func Start(in io.Reader, out io.Writer) {
 			io.WriteString(out, evaluated.Inspect())
 			io.WriteString(out, "\n")
 		}
-	}
-}
-
-func printParserErrors(out io.Writer, errors []string) {
-	io.WriteString(out, "NOT MY PROBLEM MA\n")
-	for _, msg := range errors {
-		io.WriteString(out, "\t"+msg+"\n")
 	}
 }
