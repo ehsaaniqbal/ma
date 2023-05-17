@@ -5,6 +5,7 @@ package evaluator
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/ehsaaniqbal/ma/ast"
 	"github.com/ehsaaniqbal/ma/object"
@@ -18,6 +19,8 @@ var (
 )
 
 func Eval(node ast.Node, env *object.Environment) object.Object {
+	fmt.Printf("\t->%s: %T\n", node.String(), node)
+
 	switch node := node.(type) {
 	case *ast.Program:
 		return evalProgram(node, env)
@@ -82,12 +85,37 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 	return nil
 }
 
+// Hacky evaluator for wasm that allows us to return a map of evaluated values for easier parsing from js
+func EvalProgramWasm(program *ast.Program, env *object.Environment) []map[string]string {
+	var result object.Object
+	var results []map[string]string
+
+	for i, statement := range program.Statements {
+		fmt.Printf("statement: %d", i)
+
+		result = Eval(statement, env)
+		switch result := result.(type) {
+		case *object.ReturnValue:
+			results = append(results, map[string]string{"return_value": result.Value.Inspect()})
+			return results
+		case *object.Error:
+			results = append(results, map[string]string{"error": result.Inspect()})
+			return results
+		default:
+			if result != nil {
+				results = append(results, map[string]string{strings.ToLower(string(result.Type())): result.Inspect()})
+			}
+		}
+	}
+
+	return results
+}
+
 func evalProgram(program *ast.Program, env *object.Environment) object.Object {
 	var result object.Object
 
 	for _, statement := range program.Statements {
 		result = Eval(statement, env)
-
 		switch result := result.(type) {
 		case *object.ReturnValue:
 			return result.Value

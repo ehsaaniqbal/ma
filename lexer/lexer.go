@@ -130,10 +130,10 @@ func (l *Lexer) readIdentifier() string {
 
 	for isLetter(l.ch) {
 		l.readChar()
-		// fmt.Println(l.input[pos: l.position])
+
+		// Ugly hack that allows keywords with spaces to be tokenized
 		if token.LookupIdentifier(l.input[pos:l.position]) == "IDENT" {
 			if isWhitespace(l.ch) {
-				// fmt.Println("WHITESPACE", l.peekChar())
 				pc := l.peekChar()
 				if pc == 'd' || pc == 'b' || pc == 'y' {
 					l.readChar()

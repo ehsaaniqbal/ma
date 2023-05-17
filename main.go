@@ -27,26 +27,36 @@ func eval(in string) {
 	evaluator.Eval(program, env)
 }
 
+// Calls the evaluator on the file content
+func evalFromFile() {
+	input, err := ioutil.ReadFile(os.Args[1])
+	if err != nil {
+		fmt.Printf("Error reading file: %s", err.Error())
+	}
+
+	eval(string(input))
+}
+
+// Calls the evaluator on the repl input
+func evalFromRepl() {
+	user, err := user.Current()
+	if err != nil {
+		panic(err)
+	}
+
+	// Start REPL
+	fmt.Printf("Ready for placements %s ma?!\n", user.Username)
+	repl.Start(os.Stdin, os.Stdout)
+}
+
 func main() {
 	args := os.Args[1:]
 
-	// Read source code from a file
+	// Read source code from a file if provided
 	if len(args) > 0 {
-		input, err := ioutil.ReadFile(args[0])
-		if err != nil {
-			fmt.Printf("Error reading file: %s", err.Error())
-		}
-
-		eval(string(input))
+		evalFromFile()
 	} else {
-		user, err := user.Current()
-		if err != nil {
-			panic(err)
-		}
-
-		// Start REPL
-		fmt.Printf("Ready for placements %s ma?!\n", user.Username)
-		repl.Start(os.Stdin, os.Stdout)
+		evalFromRepl()
 	}
 
 }

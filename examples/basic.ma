@@ -5,7 +5,7 @@ ma mul = initiative(x,y) {
     x * y
 }
 
-roar(mul(mul(1,3),3131))
+roar(mul(100,200))
 
 super dream (x > y) {
     roar("NO PLACEMENT!")
