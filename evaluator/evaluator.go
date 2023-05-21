@@ -18,6 +18,7 @@ var (
 	NULL  = &object.Null{}
 )
 
+// Evaluates an AST node and returns an object
 func Eval(node ast.Node, env *object.Environment) object.Object {
 	fmt.Printf("\t->%s: %T\n", node.String(), node)
 

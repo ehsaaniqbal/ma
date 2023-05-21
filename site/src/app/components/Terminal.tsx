@@ -16,7 +16,6 @@ const Terminal = ({ code }: TerminalProps) => {
       </div>
       <div className="mt-4">
         {parseMaOutput(code).map((op: string) => {
-          console.log(op);
           return <div dangerouslySetInnerHTML={{ __html: op }} />;
         })}
       </div>

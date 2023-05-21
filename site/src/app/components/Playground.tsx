@@ -1,11 +1,9 @@
 "use client";
 
+import "prismjs/themes/prism-tomorrow.css";
 import React, { useState, useRef } from "react";
 import Editor from "react-simple-code-editor";
 import { highlight } from "prismjs/components/prism-core";
-import "prismjs/themes/prism-tomorrow.css";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
 import { maSyntax } from "../lib/syntax";
 import Terminal from "./Terminal";
 import Button from "./Button";
@@ -21,20 +19,11 @@ ma mul = initiative(x,y) {
 roar(mul(x,y) + 1)
 
 super dream (x > y) {
-    roar("NO PLACEMENT FOR YOU SON!")
+    roar("NO PLACEMENT FOR YOU MA!")
 } regular {
-    roar("STILL NO PLACEMENT lol")
+    roar("STILL NO PLACEMENT")
 }
 `;
-
-const hightlightWithLineNumbers = (input: string) =>
-  highlight(input, maSyntax, "ma");
-// .split("\n")
-// .map(
-//   (line: string, i: number) =>
-//     `<span class='editorLineNumber'>${i + 1}</span>${line}`
-// )
-// .join("\n");
 
 const Playground = () => {
   const [code, setCode] = useState(maBasic);
@@ -58,15 +47,15 @@ const Playground = () => {
       id="playground"
     >
       <div className="p-4">
-        <h1 className="leading-[2] tracking-tighter font-extrabold text-4xl bg-[linear-gradient(180deg,_#fff,_#adadad)] bg-clip-text text-transparent">
+        <h1 className="leading-[2] tracking-tighter font-extrabold text-6xl bg-[linear-gradient(180deg,_#fff,_#adadad)] bg-clip-text text-transparent">
           Try MaScript Out
         </h1>
       </div>
-      <div className="whitespace-nowrap overflow-x-hidden flex justify-center items-center language-aussie color-[#ccc]">
+      <div className="whitespace-nowrap overflow-x-hidden flex justify-center items-center language-ma color-[#ccc]">
         <Editor
           value={code}
           onValueChange={(code) => setCode(code)}
-          highlight={(code) => hightlightWithLineNumbers(code)}
+          highlight={(code) => highlight(code, maSyntax, "ma")}
           padding={10}
           style={{
             fontFamily:
