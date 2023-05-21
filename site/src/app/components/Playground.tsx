@@ -1,13 +1,14 @@
 "use client";
 
 import "prismjs/themes/prism-tomorrow.css";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Editor from "react-simple-code-editor";
 import { highlight } from "prismjs";
 import { maSyntax } from "../lib/syntax";
 import Terminal from "./Terminal";
 import Button from "./Button";
 import { useWasm } from "../lib/useWasm";
+import { isMobile } from "react-device-detect";
 
 const maBasic = `ma x = 34
 ma y = 2
@@ -41,6 +42,14 @@ const Playground = () => {
     //@ts-ignore
     maOutput.current = window?.ma_output;
   }
+
+  useEffect(() => {
+    if (isMobile) {
+      alert(
+        "This site isn't optimized for mobile view and never will be lol. Use a desktop for the best experience"
+      );
+    }
+  }, []);
 
   return (
     <section
