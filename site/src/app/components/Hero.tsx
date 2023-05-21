@@ -40,7 +40,7 @@ const Hero = () => {
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn more about MaScript's revolutionary features
+            Learn more about MaScript&apos;s revolutionary features
           </p>
         </a>
       </div>

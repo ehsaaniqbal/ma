@@ -3,7 +3,7 @@
 import "prismjs/themes/prism-tomorrow.css";
 import React, { useState, useRef } from "react";
 import Editor from "react-simple-code-editor";
-import { highlight } from "prismjs/components/prism-core";
+import { highlight } from "prismjs";
 import { maSyntax } from "../lib/syntax";
 import Terminal from "./Terminal";
 import Button from "./Button";
@@ -26,6 +26,8 @@ super dream (x > y) {
 `;
 
 const Playground = () => {
+  useWasm("/main.wasm");
+
   const [code, setCode] = useState(maBasic);
   const [output, setOutput] = useState("");
   const [showTerminal, setShowTerminal] = useState(false);
@@ -34,7 +36,6 @@ const Playground = () => {
   let maOutput = useRef(null);
 
   if (process.browser) {
-    useWasm("/main.wasm");
     //@ts-ignore
     maEval.current = window?.ma_eval;
     //@ts-ignore

@@ -15,8 +15,8 @@ const Terminal = ({ code }: TerminalProps) => {
         <h4 className="text-2xl font-semibold">Output</h4>
       </div>
       <div className="mt-4">
-        {parseMaOutput(code).map((op: string) => {
-          return <div dangerouslySetInnerHTML={{ __html: op }} />;
+        {parseMaOutput(code).map((op: string, index: number) => {
+          return <div key={index} dangerouslySetInnerHTML={{ __html: op }} />;
         })}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { highlight } from "prismjs/components/prism-core";
+import { highlight } from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
 import { maSyntax } from "../lib/syntax";
 
@@ -99,6 +99,7 @@ const Docs = () => {
       <div className="grid text-center lg:mb-0 lg:grid-cols-2 lg:text-left gap-5">
         {docContent.map((dc, index) => (
           <Doc
+            key={index}
             code={dc.code}
             title={dc.title}
             description={dc.description}
